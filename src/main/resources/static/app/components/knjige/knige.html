@@ -1,0 +1,106 @@
+<div ng-controller="knjigaCtrl">
+	<h1>Unesite vrednosti za ucesnika kojeg zelite da dodate:</h1>
+	<form>
+		<div class="form-group">
+			<label>Naziv</label> <input class="form-control"
+				ng-model="knjiga.naziv " />
+		</div>
+		<div class="form-group">
+			<label>Izdanje</label> <input class="form-control"
+				ng-model="knjiga.izdanje" />
+		</div>
+		<div class="form-group">
+			<label>Pisac</label> <input class="form-control"
+				ng-model="knjiga.pisac" />
+		</div>
+		<div class="form-group">
+			<label>ISBN</label> <input class="form-control"
+				ng-model="knjiga.isbn" />
+		</div>
+		<div class="form-group">
+			<label>Izdavac</label> <select class="form-control"
+				ng-model="knjiga.izdavacId">
+				<option ng-repeat="k in izdavaci" value="{{k.id}}"
+					ng-selected="k.id == knjiga.izdavacId">{{k.naziv}}</option>
+			</select>
+		</div>
+
+		<button type="button" ng-click="doAdd()" class="btn btn-success">Dodaj</button>
+	</form>
+
+	<br> <br>
+
+
+		<button type="button" ng-click="doAdd()" class="btn btn-success">Dodaj</button>
+	</form>
+
+	<br> <br>
+
+	<div class="col-3 col-lg-12">
+		<form>
+			<div class="form-group">
+				<label>Naziv</label> <input class="form-control"
+					ng-model="searchParams.model" />
+			</div>
+			<div class="form-group">
+				<label>Pisac:</label> <input class="form-control"
+					ng-model="searchParams.godiste" />
+			</div>
+			<div class="form-group">
+				<label>Minimalno glasova:</label> <input class="form-control"
+					ng-model="searchParams.potrosnja" />
+			</div>
+			
+			<button type="button" ng-click="doSearch()" class="btn btn-primary">Pretrazi</button>
+		</form>
+	</div>
+	
+	<div class="col-12 col-lg-12">
+
+			<div class="btn-group float-right">
+				<button ng-disabled="pageNum == 0" ng-click="changePage(-1)"
+					class="btn btn-info">Prosla</button>
+				<button ng-disabled="pageNum == totalPages - 1"
+					ng-click="changePage(1)" class="btn btn-info">Sledeca</button>
+			</div>
+
+			<br> <br>
+
+
+
+
+	<table class="table table-bordered table-striped">
+		<thead class="thead-dark">
+			<tr>
+				<th>Naziv</th>
+				<th>Izdanje</th>
+				<th>Pisac</th>
+				<th>Broj Glasova</th>
+				<th>Naziv izdavaca</th>
+				<th>Izmeni</th>
+				<th>Obrisi</th>
+				<th>+1</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="r in knjige">
+				<td>{{r.naziv}}</td>
+				<td>{{r.izdanje}}</td>
+				<td>{{r.pisac}}</td>
+				<td>{{r.brGlasova}}</td>
+				<td>{{r.izdavacNaziv}}</td>
+				<td><button class="btn btn-warning" ng-click="goToEdit(r.id)">
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+					</button></td>
+				<td><button type="button" class="btn btn-danger"
+						ng-click="doDelete(r.id)">
+						<i class="fa fa-trash-o" aria-hidden="true"></i>
+					</button></td>
+				<td><button class="btn btn-warning" ng-click="doIznajmi(r.id)"
+				 ng-disabled="r.iznajmljen == true">
+						Iznajmi</i>
+					</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
