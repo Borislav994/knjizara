@@ -62,6 +62,8 @@ public class ApiIzdavacController {
 		return new ResponseEntity<>(toDTOk.convert(auto), HttpStatus.OK);
 	}
 
+
+
 	@ExceptionHandler(value = DataIntegrityViolationException.class)
 	public ResponseEntity<Void> handle() {
 		return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
